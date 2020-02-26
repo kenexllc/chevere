@@ -1,0 +1,29 @@
+dist: bionic
+language: php
+
+php:
+  - 7.4
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - phpenv config-add chevere.ini
+  - composer validate
+
+install:
+  - composer install --prefer-dist --classmap-authoritative
+
+script:
+  - vendor/bin/phpunit --coverage-clover=build/coverage/clover.xml
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/coverage/clover.xml
+  - bash <(curl -s https://codecov.io/bash)

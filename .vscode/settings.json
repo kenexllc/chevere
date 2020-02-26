@@ -1,11 +1,3 @@
 {
-  "search.exclude": {
-    "**/vendor/chevereto": true
-  },
-  "files.exclude": {
-    "**/vendor/chevereto": true
-  },
-  "files.watcherExclude": {
-    "**/vendor/chevereto": true
-  }
+    "phpunit.files": "components/**/Tests/*Test.php"
 }
